@@ -1,0 +1,15 @@
+{
+  "name": "home_finder",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "setup": "yarn vercel login && yarn vercel link",
+    "start": "yarn vercel dev",
+    "dev": "yarn start"
+  },
+  "dependencies": {
+    "vercel": "^34.2.0"
+  }
+}
