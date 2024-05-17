@@ -19,7 +19,7 @@ func checkNilErr(e error) {
 	}
 }
 
-func Search(priceMax, locations string) []string {
+func makeApiRequest(priceMax, locations string) Response {
 	const baseURL = "https://www.imovirtual.com/_next/data/dpR8lHfeE74mEL00QTJdF/pt/resultados/arrendar/apartamento/muitas-localizacoes.json"
 
 	url, err := url.Parse(baseURL)
@@ -52,6 +52,11 @@ func Search(priceMax, locations string) []string {
 	err = json.Unmarshal(body, &response)
 	checkNilErr(err)
 
+	return response
+}
+
+func Search(priceMax, locations string) []string {
+	response := makeApiRequest(priceMax, locations)
 	messages := []string{}
 
 	for _, listing := range response.PageProps.Data.SearchAds.Items {
@@ -70,7 +75,6 @@ func Search(priceMax, locations string) []string {
 	}
 
 	return messages
-
 }
 
 type Response struct {
