@@ -11,7 +11,7 @@ import (
 )
 
 // cron job runs every hour
-const frequency = -1
+const frequency = -4
 
 func checkNilErr(e error) {
 	if e != nil {
@@ -19,10 +19,8 @@ func checkNilErr(e error) {
 	}
 }
 
-func Search() []string {
+func Search(priceMax, locations string) []string {
 	const baseURL = "https://www.imovirtual.com/_next/data/dpR8lHfeE74mEL00QTJdF/pt/resultados/arrendar/apartamento/muitas-localizacoes.json"
-	const priceMax = "800"
-	const locations = "[lisboa/lisboa/santa-clara,lisboa/lisboa/benfica,lisboa/lisboa/avenidas-novas,lisboa/lisboa/arroios,lisboa/lisboa/alvalade,lisboa/lisboa/penha-de-franca,lisboa/lisboa/olivais,lisboa/lisboa/lumiar,lisboa/lisboa/parque-das-nacoes,lisboa/lisboa/areeiro]"
 
 	url, err := url.Parse(baseURL)
 	checkNilErr(err)
