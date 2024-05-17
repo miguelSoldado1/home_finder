@@ -2,13 +2,13 @@
   "name": "home_finder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
+  "author": "",
+  "scripts": {
+    "setup": "yarn vercel login && yarn vercel link",
+    "start": "yarn vercel dev",
+    "dev": "yarn start"
+  },
   "dependencies": {
     "vercel": "^34.2.0"
   }
