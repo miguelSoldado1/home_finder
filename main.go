@@ -19,7 +19,7 @@ func checkNilErr(e error) {
 }
 
 func main() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load()
 	checkNilErr(err)
 
 	bot.BotToken = os.Getenv("BOT_TOKEN")
