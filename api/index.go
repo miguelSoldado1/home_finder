@@ -22,13 +22,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	bot.BotToken = bot_token
 	bot.Run()
+	fmt.Println("Bot running...")
 
 	messages := imovirtual.Search(priceMax, locations)
 	for _, msg := range messages {
 		bot.SendMessage("1241108323655356497", msg)
+		fmt.Println("message", msg)
 	}
 
 	bot.Close()
+	fmt.Println("Bot closed!")
 
 	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
 }
