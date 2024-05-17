@@ -10,10 +10,9 @@ import (
 	imovirtual "example.com/home_finder_bot/Imovirtual"
 )
 
-const priceMax = "800"
-const locations = "[lisboa/lisboa/santa-clara,lisboa/lisboa/benfica,lisboa/lisboa/avenidas-novas,lisboa/lisboa/arroios,lisboa/lisboa/alvalade,lisboa/lisboa/penha-de-franca,lisboa/lisboa/olivais,lisboa/lisboa/lumiar,lisboa/lisboa/parque-das-nacoes,lisboa/lisboa/areeiro]"
-
 func Handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Api triggered")
+
 	bot_token := os.Getenv("BOT_TOKEN")
 
 	if bot_token == "" {
@@ -22,16 +21,12 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	bot.BotToken = bot_token
 	bot.Run()
-	fmt.Println("Bot running...")
 
-	messages := imovirtual.Search(priceMax, locations)
+	// lisboa_under_800
+	messages := imovirtual.Search("800", "[lisboa/lisboa/santa-clara,lisboa/lisboa/benfica,lisboa/lisboa/avenidas-novas,lisboa/lisboa/arroios,lisboa/lisboa/alvalade,lisboa/lisboa/penha-de-franca,lisboa/lisboa/olivais,lisboa/lisboa/lumiar,lisboa/lisboa/parque-das-nacoes,lisboa/lisboa/areeiro]")
 	for _, msg := range messages {
-		bot.SendMessage("1241108323655356497", msg)
-		fmt.Println("message", msg)
+		bot.SendMessage("1241143437533777931", msg)
 	}
 
 	bot.Close()
-	fmt.Println("Bot closed!")
-
-	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
 }

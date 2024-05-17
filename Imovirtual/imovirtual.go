@@ -11,7 +11,7 @@ import (
 )
 
 // cron job runs every hour
-const frequency = -5
+const frequency = -1
 
 func checkNilErr(e error) {
 	if e != nil {
