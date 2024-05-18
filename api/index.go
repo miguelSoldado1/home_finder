@@ -12,13 +12,14 @@ import (
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	main()
-	fmt.Println("Api triggered")
+	numOfMessages := main()
+	fmt.Println(numOfMessages, "new ads found!")
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	resp := make(map[string]string)
-	resp["message"] = "Hello World from Go! 👋"
+	resp["message"] = "Success!"
+	resp["new_ads"] = fmt.Sprintf("%d", numOfMessages)
 	resp["language"] = "go"
 	resp["cloud"] = "Hosted on Vercel! ▲"
 	jsonResp, err := json.Marshal(resp)
@@ -29,7 +30,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonResp)
 }
 
-func main() {
+func main() int {
 	bot_token := os.Getenv("BOT_TOKEN")
 
 	if bot_token == "" {
@@ -46,4 +47,6 @@ func main() {
 	}
 
 	bot.Close()
+
+	return len(messages)
 }
