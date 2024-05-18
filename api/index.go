@@ -17,8 +17,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	resp := make(map[string]string)
-	resp["message"] = "Success!"
-	resp["new_ads"] = fmt.Sprintf("%d", numOfMessages)
+	resp["message"] = fmt.Sprintf("%d new ads found!", numOfMessages)
 	resp["language"] = "go"
 	resp["cloud"] = "Hosted on Vercel! ▲"
 	jsonResp, err := json.Marshal(resp)
