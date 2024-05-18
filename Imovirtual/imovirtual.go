@@ -62,7 +62,10 @@ func Search(priceMax string) []string {
 	for _, listing := range response.PageProps.Data.SearchAds.Items {
 		now := time.Now()
 		hourAgo := now.Add(offset)
-		dateCreated, err := time.Parse("2006-01-02 15:04:05", listing.DateCreated)
+
+		location, err := time.LoadLocation("Europe/Lisbon")
+		checkNilErr(err)
+		dateCreated, err := time.ParseInLocation("2006-01-02 15:04:05", listing.DateCreated, location)
 		checkNilErr(err)
 
 		if dateCreated.Before(hourAgo) {
@@ -70,7 +73,7 @@ func Search(priceMax string) []string {
 		}
 
 		message := fmt.Sprintf("%s, %d %s\n", listing.Location.Address.City.Name, listing.TotalPrice.Value, listing.TotalPrice.Currency)
-		message += fmt.Sprintf("https://www.imovirtual.com/pt/anuncio/%s\n", listing.Slug)
+		message += fmt.Sprintf("https://www.imovirtual.com/pt/anuncio/%s", listing.Slug)
 		messages = append(messages, message)
 	}
 
