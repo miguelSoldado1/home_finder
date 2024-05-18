@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
-	bot "example.com/home_finder_bot/Bot"
+	bot "example.com/home_finder_bot/Discord"
 	imovirtual "example.com/home_finder_bot/Imovirtual"
 )
 
@@ -31,22 +30,20 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() int {
-	bot_token := os.Getenv("BOT_TOKEN")
-
-	if bot_token == "" {
-		log.Fatal("BOT_TOKEN is not set")
-	}
-
-	bot.BotToken = bot_token
-	bot.Run()
-
 	// lisboa_under_800
-	messages := imovirtual.Search("800")
-	for _, msg := range messages {
-		bot.SendMessage("1241143437533777931", msg)
+	ads := imovirtual.Search("800")
+	numOfAds := len(ads)
+
+	// only run the bot if there are new ads
+	if numOfAds > 0 {
+		bot.Run()
+
+		for _, msg := range ads {
+			bot.SendMessage("1241143437533777931", msg)
+		}
+
+		bot.Close()
 	}
 
-	bot.Close()
-
-	return len(messages)
+	return numOfAds
 }

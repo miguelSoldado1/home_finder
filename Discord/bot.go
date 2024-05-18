@@ -2,6 +2,7 @@ package bot
 
 import (
 	"log"
+	"os"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -14,6 +15,14 @@ var (
 func checkNilErr(e error) {
 	if e != nil {
 		log.Fatal("Error message: ", e)
+	}
+}
+
+func init() {
+	// Get the bot token from the environment variables
+	BotToken = os.Getenv("BOT_TOKEN")
+	if BotToken == "" {
+		log.Fatal("Bot token not found in environment variables")
 	}
 }
 
