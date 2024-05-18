@@ -40,7 +40,7 @@ func main() {
 	bot.Run()
 
 	// lisboa_under_800
-	messages := imovirtual.Search("800", "[lisboa/lisboa/santa-clara,lisboa/lisboa/benfica,lisboa/lisboa/avenidas-novas,lisboa/lisboa/arroios,lisboa/lisboa/alvalade,lisboa/lisboa/penha-de-franca,lisboa/lisboa/olivais,lisboa/lisboa/lumiar,lisboa/lisboa/parque-das-nacoes,lisboa/lisboa/areeiro]")
+	messages := imovirtual.Search("800")
 	for _, msg := range messages {
 		bot.SendMessage("1241143437533777931", msg)
 	}

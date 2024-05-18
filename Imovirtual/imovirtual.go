@@ -10,8 +10,9 @@ import (
 	"time"
 )
 
-// cron job runs every hour
-const frequency = -1
+// the cron job runs every hour
+const offset = time.Duration(-1) * time.Hour
+const baseURL = "https://www.imovirtual.com/_next/data/dpR8lHfeE74mEL00QTJdF/pt/resultados/arrendar/apartamento/lisboa.json"
 
 func checkNilErr(e error) {
 	if e != nil {
@@ -19,20 +20,19 @@ func checkNilErr(e error) {
 	}
 }
 
-func makeApiRequest(priceMax, locations string) Response {
-	const baseURL = "https://www.imovirtual.com/_next/data/dpR8lHfeE74mEL00QTJdF/pt/resultados/arrendar/apartamento/muitas-localizacoes.json"
-
+func makeApiRequest(priceMax string) Response {
 	url, err := url.Parse(baseURL)
 	checkNilErr(err)
 
 	q := url.Query()
-	q.Add("priceMax", priceMax)
-	q.Add("locations", locations)
 	q.Add("by", "LATEST")
 	q.Add("direction", "DESC")
 	q.Add("searchingCriteria", "arrendar")
 	q.Add("searchingCriteria", "apartamento")
 	q.Add("searchingCriteria", "muitas-localizacoes")
+	q.Add("searchingCriteria", "lisboa")
+	q.Add("searchingCriteria", "lisboa")
+	q.Add("priceMax", priceMax)
 	url.RawQuery = q.Encode()
 
 	client := &http.Client{}
@@ -55,13 +55,13 @@ func makeApiRequest(priceMax, locations string) Response {
 	return response
 }
 
-func Search(priceMax, locations string) []string {
-	response := makeApiRequest(priceMax, locations)
+func Search(priceMax string) []string {
+	response := makeApiRequest(priceMax)
 	messages := []string{}
 
 	for _, listing := range response.PageProps.Data.SearchAds.Items {
 		now := time.Now()
-		hourAgo := now.Add(time.Duration(frequency) * time.Hour)
+		hourAgo := now.Add(offset)
 		dateCreated, err := time.Parse("2006-01-02 15:04:05", listing.DateCreated)
 		checkNilErr(err)
 
