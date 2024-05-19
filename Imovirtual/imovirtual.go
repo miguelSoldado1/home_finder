@@ -29,11 +29,12 @@ func makeApiRequest(priceMax string) Response {
 	q.Add("direction", "DESC")
 	q.Add("searchingCriteria", "arrendar")
 	q.Add("searchingCriteria", "apartamento")
-	q.Add("searchingCriteria", "muitas-localizacoes")
 	q.Add("searchingCriteria", "lisboa") // district
 	// q.Add("searchingCriteria", "lisboa")	// county
 	q.Add("priceMax", priceMax)
 	url.RawQuery = q.Encode()
+
+	fmt.Println(url.String())
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url.String(), nil)
