@@ -30,8 +30,8 @@ func makeApiRequest(priceMax string) Response {
 	q.Add("searchingCriteria", "arrendar")
 	q.Add("searchingCriteria", "apartamento")
 	q.Add("searchingCriteria", "muitas-localizacoes")
-	q.Add("searchingCriteria", "lisboa")
-	q.Add("searchingCriteria", "lisboa")
+	q.Add("searchingCriteria", "lisboa") // district
+	// q.Add("searchingCriteria", "lisboa")	// county
 	q.Add("priceMax", priceMax)
 	url.RawQuery = q.Encode()
 
