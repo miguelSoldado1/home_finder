@@ -5,10 +5,31 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
-	bot "github.com/miguelSoldado1/home_finder_bot/Discord"
-	imovirtual "github.com/miguelSoldado1/home_finder_bot/Imovirtual"
+	bot "github.com/miguelSoldado1/home_finder_bot/pkg/discord"
+	imovirtual "github.com/miguelSoldado1/home_finder_bot/pkg/imovirtual"
 )
+
+// the cron job runs every hour
+const offset = time.Duration(-1) * time.Hour
+
+func main() int {
+	// lisboa_under_800
+	ads := imovirtual.Search("800", offset)
+	numOfAds := len(ads)
+
+	// only run the bot if there are new ads
+	if numOfAds > 0 {
+		bot.Run()
+		for _, msg := range ads {
+			bot.SendMessage("1241143437533777931", msg)
+		}
+		bot.Close()
+	}
+
+	return numOfAds
+}
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	numOfMessages := main()
@@ -26,23 +47,4 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(jsonResp)
-}
-
-func main() int {
-	// lisboa_under_800
-	ads := imovirtual.Search("800")
-	numOfAds := len(ads)
-
-	// only run the bot if there are new ads
-	if numOfAds > 0 {
-		bot.Run()
-
-		for _, msg := range ads {
-			bot.SendMessage("1241143437533777931", msg)
-		}
-
-		bot.Close()
-	}
-
-	return numOfAds
 }

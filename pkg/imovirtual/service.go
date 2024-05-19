@@ -1,4 +1,4 @@
-package imovirtual
+package service
 
 import (
 	"encoding/json"
@@ -10,8 +10,6 @@ import (
 	"time"
 )
 
-// the cron job runs every hour
-const offset = time.Duration(-1) * time.Hour
 const baseURL = "https://www.imovirtual.com/_next/data/dpR8lHfeE74mEL00QTJdF/pt/resultados/arrendar/apartamento/lisboa.json"
 
 func checkNilErr(e error) {
@@ -54,7 +52,7 @@ func makeApiRequest(priceMax string) Response {
 	return response
 }
 
-func Search(priceMax string) []string {
+func Search(priceMax string, offset time.Duration) []string {
 	response := makeApiRequest(priceMax)
 	messages := []string{}
 
