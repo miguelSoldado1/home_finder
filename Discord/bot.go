@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -19,6 +20,9 @@ func checkNilErr(e error) {
 }
 
 func init() {
+	err := godotenv.Load()
+	checkNilErr(err)
+
 	// Get the bot token from the environment variables
 	BotToken = os.Getenv("BOT_TOKEN")
 	if BotToken == "" {
