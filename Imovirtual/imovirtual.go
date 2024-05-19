@@ -34,8 +34,6 @@ func makeApiRequest(priceMax string) Response {
 	q.Add("priceMax", priceMax)
 	url.RawQuery = q.Encode()
 
-	fmt.Println(url.String())
-
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url.String(), nil)
 	checkNilErr(err)

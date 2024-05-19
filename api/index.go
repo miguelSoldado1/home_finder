@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	bot "example.com/home_finder_bot/Discord"
 	imovirtual "example.com/home_finder_bot/Imovirtual"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(time.Now())
 	numOfMessages := main()
 	fmt.Println(numOfMessages, "new ads found!")
 
