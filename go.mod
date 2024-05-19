@@ -1,4 +1,4 @@
-module example.com/home_finder_bot
+module github.com/miguelSoldado1/home_finder_bot
 
 go 1.22.3
 

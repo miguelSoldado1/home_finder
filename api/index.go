@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	bot "example.com/home_finder_bot/Discord"
-	imovirtual "example.com/home_finder_bot/Imovirtual"
+	bot "github.com/miguelSoldado1/home_finder_bot/Discord"
+	imovirtual "github.com/miguelSoldado1/home_finder_bot/Imovirtual"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
