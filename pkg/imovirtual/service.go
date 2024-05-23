@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const baseURL = "https://www.imovirtual.com/_next/data/z2PABFeFQ8_uZdeF9_-ew/pt/resultados/arrendar/apartamento/lisboa/lisboa.json"
+const baseURL = "https://www.imovirtual.com/_next/data/Rv5i98eSVcjaKPFQ7pn_H/pt/resultados/arrendar/apartamento/lisboa/lisboa.json"
 
 func checkNilErr(e error) {
 	if e != nil {
